@@ -28,13 +28,32 @@ class App extends Component {
     items.push(item)
     this.setState({items: items})
   }
+  increaseQuantity = (id) => {
+    let items = this.state.items;
+    const item = items.find(i => i.id === id);
+    if (item) {
+      item.price = (item.price || 0) + 1;
+      this.setState({ items });
+    }
+  }
+   decreaseQuantity = (id) => {
+    console.log(id);
+    let items = this.state.items;
+    const item = items.find(i => i.id === id);
+    if (item) {
+      item.price = (item.price || 0) - 1;
+      this.setState({ items });
+    }
+  }
 
   render() {
     return (
       <div className="container">
         <h1>Product List React App</h1>
         <div className="table">
-          <Items items={this.state.items} del={this.deleteItem}/>
+          <Items items={this.state.items} del={this.deleteItem}
+          
+          increase={this.increaseQuantity} decrease={this.decreaseQuantity} />
           <AddItem add={this.addItem}/>
           <Total items={this.state.items}/>
         </div>
